@@ -1,7 +1,7 @@
 const TBL = document.getElementById("tab-data");
+const FORM = document.getElementById("form");
 
 function renderTblHeading () {
-    TBL.innerHTML = "";
     const table = document.createElement("table");
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");
@@ -13,10 +13,10 @@ function renderTblHeading () {
     });
     thead.appendChild(tr);
     table.appendChild(thead);
-    return table
+    return table;
   }
   
-  function renderTblBtn(index, data){
+  function renderTblBtn(index, data, obj){
     const td = document.createElement("td");
     const btnEdit = document.createElement("button");
     const btnDel = document.createElement("button");
@@ -24,19 +24,24 @@ function renderTblHeading () {
     btnDel.textContent = "Del";
     td.appendChild(btnEdit);
     td.appendChild(btnDel);
+
     btnDel.addEventListener('click', function(e){
+      console.log("delete button clicked");
+      console.log(e);
       data.splice(index, 1);
       renderTbl(data);
-    })
+    });
+
     btnEdit.addEventListener('click', function(e){
-      const rdata = data[index];
-      form.firstname.value = rdata.firstName;
-      form.lastname.value = rdata.lastName;
-      form.houses.value = rdata.houseS;
-      form.housem.value = rdata.houseM;
+      console.log("edit button clicked");
+      console.log(e);
+      FORM[1].value = obj.firstName;
+      FORM[2].value = obj.lastName;
+      FORM[3].value = obj.houseM;
+      FORM[4].value = obj.houseS;
       data.splice(index, 1);
       renderTbl(data);
-    })
+    });
     return td;
   }
 
@@ -52,7 +57,7 @@ function renderTblHeading () {
           tr.appendChild(td);
         }
       }
-      const td = renderTblBtn(index);
+      const td = renderTblBtn(index, data, obj);
       tr.appendChild(td);
       tbody.appendChild(tr);
     });
@@ -60,12 +65,17 @@ function renderTblHeading () {
   }
   
   function renderTbl(data){
-   const table = renderTblHeading();
-   const tbody = renderTblBody(data);
-   table.appendChild(tbody);
-   TBL.appendChild(table);
+    TBL.innerHTML = "";
+    if(data.length !==0){
+      console.log("Build the table");
+      const table = renderTblHeading();
+      const tbody = renderTblBody(data);
+      table.appendChild(tbody);
+      TBL.appendChild(table);
+    }
+   
   }
 
-export {renderTbl};
+export {renderTbl, renderTblHeading };
 
 // So we can just make multiple render.js files rather than writing large amounts of code?
