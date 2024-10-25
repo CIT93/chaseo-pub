@@ -1,6 +1,7 @@
 import {FORM, TBL} from "./global.js";
 import {saveLS} from "./storage.js";
 
+
 function renderTblHeading () {
     const table = document.createElement("table");
     const thead = document.createElement("thead");
@@ -33,6 +34,7 @@ function renderTblHeading () {
     btnDel.addEventListener('click', function(e){
       onUpdate(index, data);
     });
+
     btnEdit.addEventListener('click', function(e){
       FORM[1].value = obj.firstName;
       FORM[2].value = obj.lastName;
@@ -40,7 +42,11 @@ function renderTblHeading () {
       FORM[4].value = obj.houseS;
       onUpdate(index, data);
     });
+
+    
     return td;
+
+
   }
 
   function renderTblBody(data){
@@ -49,17 +55,21 @@ function renderTblHeading () {
       console.log(index);
       const tr = document.createElement("tr");
       for (const [key, value] of Object.entries(obj)) {
+        console.log(`key ${key} value ${value}`);
         if (key !== "lastName" && key !== "houseMPTS" && key !== "houseSPTS") {
           const td = document.createElement("td");
           td.textContent = value;
           tr.appendChild(td);
         }
       }
+
       const td = renderTblBtn(index, data, obj);
       tr.appendChild(td);
       tbody.appendChild(tr);
     });
+
      return tbody;
+
   }
   
   function renderTbl(data){
@@ -71,7 +81,6 @@ function renderTblHeading () {
       table.appendChild(tbody);
       TBL.appendChild(table);
     }
-   
   }
 
 export {renderTbl, renderTblHeading };

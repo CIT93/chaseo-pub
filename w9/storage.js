@@ -1,6 +1,6 @@
 const cfpData = getLS();
 
-function saveLS(cfpData) {
+function saveLS() {
     const serializedArr = JSON.stringify(cfpData);
     localStorage.setItem("cfp", serializedArr);
 }
