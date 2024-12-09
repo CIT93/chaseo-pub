@@ -55,7 +55,7 @@ FORM.addEventListener('submit', function (e) {
 
 //rest operator
 // const add2 = function(...a) {
-//   return 2 + a[3];
+//  return 2 + a[3];
 // }
 
 // const result = add2(1, 2, 3, 4);
