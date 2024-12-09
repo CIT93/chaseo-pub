@@ -22,7 +22,7 @@ import {saveLS} from "./storage.js";
     renderTbl(data);
   }
 
-  const renderTblBtn = (index, data) => {
+  const renderTblBtn = (index, data, obj) => {
     const td = document.createElement("td");
     const btnEdit = document.createElement("button");
     const btnDel = document.createElement("button");
