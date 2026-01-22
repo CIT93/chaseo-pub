@@ -1,53 +1,51 @@
 console.log('Hello from app.js! Your JavaScript is connected and running!');
-// --- Part 1: Declaring Variables ---
-console.log('--- Part 1: Declaring Variables')
+// --- Part 1: Select HTML Elements ----
+// We use document.getElementById() to get a reference to an element by its unique ID.
+// We store these references in 'const' variables because the elements themselves won't change.
+const messageDisplayElement = document.getElementById("output-message");
+const updateButton = document.getElementById("update-button");
 
-// 'let' for values that can change
-// We can reassign 'let' variables
-let score = 50;
-console.log(`Initial score (let): ${score}`);
-score = 75;
-console.log(`Updated score: ${score}`);
+//These variables will change as the user interacts with the page.
+let userName = 'Chase';
+let clickCount = 0;
 
-// 'const' for values that should NOT change
-const GAME_TITLE = "My Awesome Game";
-console.log(`Game Title (const): ${GAME_TITLE}`);
-//GAME_TITLE = "Another Awesome Game";
-// Comment out above line error
+// --- Part 2: Define and call the handleButtonClick Function---
+// A function is a block of code designed to perform a particular task.
 
-// --- Part 2: Data Types ---
-console.log("--- Data Types (using typeof) ---")
+const handleButtonClick = function() {
+    //clickCount = clickCount + 1;
+    // Increase clickCount by 1 each time the button is clicked
+    clickCount += 1;
 
-let playerName = 'Hero';    // string (text)
-let playerHealth = 100;       // number (whole or decimal number)
-let isGameOver = false;     // boolean (true or false)
+    // Template strings (literal) to easily combine our variables and text into one message
+    let message = `Hello, ${userName}! You have clicked the button ${clickCount} time(s).`;
 
-console.log(`${playerName} is a typeof ${typeof playerName}`);
-console.log(`${playerHealth} is a typeof ${typeof playerHealth}`);
-console.log(`${isGameOver} is a typeof ${typeof isGameOver}`);
+    // This is basic decision-making in JavaScript!
+    // Use a simple 'if' statement to make our page react differently based on clickCount.
+    if(clickCount >= 5) {
+        // We can even change the style of an HTML element directly with JavaScript!
+        // Change text color
+        message += ' WOW, you are super clicker!';
+        messageDisplayElement.style.color = 'purple';
+    } else {
+        messageDisplayElement.style.color = '#333';
+    }
+    // Update the text content of our paragraph element on the page.
+    // This is how JavaScript makes changes visible on the web page!
+    messageDisplayElement.textContent = message;
 
-// Chase's Variable Rule
-// Use const unless you can't than use let
+    console.log(`Button Clicked! Current click count: ${clickCount}`)
+};
 
-// --- Part 3: Arithmetic Operators ---
-console.log("--- Arithmetic Operators (Math!) ---");
-const num1 = 10;
-const num2 = 3;
 
-console.log(`${num1} + ${num2} = ${num1 + num2}`); // Addition
-console.log(`${num1} / ${num2} = ${num1 / num2}`); // Division
-console.log(`${num1} % ${num2} = ${num1 % num2}`); // Modulo (remainder)
+document.addEventListener('DOMContentLoaded', function(){
+    // --- Part 3: Make the Button Clickable (Event Listener) ---
+    // This part ensures our JavaScript code runs only AFTER the HTML is fully loaded and parsed.
+    // The 'DOMContentLoaded' event is perfect for this. It fires when the HTML document is ready.
 
-// --- Part 4: Assignment and Comparison Operators ---
-console.log(`--- Assignment and Comparison Operators ---`);
-let totalCoins = 20;    // Assignment
-totalCoins += 5;        // Addition Assignment operator
-console.log(`Total coins after += 5: ${totalCoins}`); // Adds 5 to totalCoins (totalCoins = totalCoins + 5)
-
-let valueA = 5;
-let valueB = '5';
-// Comparison Operator
-console.log(`Strict Equality (===) ${valueA} === ${valueB} is ${valueA === valueB}`);
-console.log(`Loose Equality (===) ${valueA} === ${valueB} is ${valueA == valueB}`);
-console.log(`Strict Not Equality (!===) ${valueA} !== ${valueB} is ${valueA !== valueB}`);
-console.log(`Greater Than ${valueA} > 3 is ${valueA > 3}`);
+    console.log('DOM fully loaded and parsed, App is ready for interaction')
+    // Attach an event listener to our 'updateButton.
+    // When 'updateButton' receives a 'click' event, the 'handleButtonClick' function will execute.
+    updateButton.addEventListener('click', handleButtonClick);
+    messageDisplayElement.textContent = `Welcome, ${userName}! Click the button below to start counting`    
+})
