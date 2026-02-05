@@ -14,7 +14,6 @@ const getSelectedRadioValue = function (radioButtons) {
   for (const radio of radioButtons) {
     if (radio.checked) return radio.value;
   }
-    return null;
 };
 
 
