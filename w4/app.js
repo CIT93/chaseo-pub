@@ -1,5 +1,6 @@
 //Imports this file to the other orderhandler
 import * as orderHandler from "./order-handler.js";
+import * as priceCalculator from "./price-calculator.js";
 
 //Reference to the Form
 const orderForm = document.getElementById('order-form');
