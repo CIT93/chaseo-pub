@@ -2,6 +2,7 @@
 //Imports this file to the price calculator
 import * as orderHandler from "./order-handler.js";
 import * as priceCalculator from "./price-calculator.js";
+import * as resultsDisplay from "./results-display.js";
 
 const orders = [];
 
@@ -30,6 +31,9 @@ const handleFormSubmit = function (event) {
         ...calculatedPrice,
         timestamp: new Date().toISOString()
     };
+
+    resultsDisplay.displayResults(newOrder);
+
     // To store in the list
     orders.push(newOrder);
 
