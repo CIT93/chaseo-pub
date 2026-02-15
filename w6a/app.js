@@ -3,6 +3,7 @@
 import * as orderHandler from "./order-handler.js";
 import * as priceCalculator from "./price-calculator.js";
 import * as resultsDisplay from "./results-display.js";
+import * as orderStorage from "./order-storage.js";
 
 const orders = [];
 
@@ -52,6 +53,13 @@ const handleFormSubmit = function (event) {
     //Set up the init function with Event Listeners
     const init = function () {
         console.log('App initialized: DOM is ready! Try submitting the form.');
+        const loadedEntries = orderStorage.loadOrders();
+        if (loadedEntries.length > 0) {
+            orders.push(...loadedEntries);
+            console.log('Data has been loaded from localStorage');
+        } else {
+            console.log('No data has been found in localStorage');
+        }
         orderForm.addEventListener('submit', handleFormSubmit);
     };
 
