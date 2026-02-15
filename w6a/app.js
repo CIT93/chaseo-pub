@@ -14,7 +14,7 @@ const orderForm = document.getElementById('order-form');
 //const orderSummary = document.getElementById('order-summary');
 
 //Handles the submit roder function
-const handleFormSubmit = function (event) {
+const handleOrderSubmit = function (event) {
     //Stop the reload
     event.preventDefault();
 
@@ -37,8 +37,8 @@ const handleFormSubmit = function (event) {
 
     // To store in the list
     orders.push(newOrder);
-
     console.log(orders);
+    orderStorage.saveOrders(orders);
     orderHandler.clearOrderForm();
 };
 
@@ -60,7 +60,7 @@ const handleFormSubmit = function (event) {
         } else {
             console.log('No data has been found in localStorage');
         }
-        orderForm.addEventListener('submit', handleFormSubmit);
+        orderForm.addEventListener('submit', handleOrderSubmit);
     };
 
     //This attaches the init function to the DOM Content Loader event
