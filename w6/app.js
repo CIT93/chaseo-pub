@@ -54,6 +54,12 @@ const handleOrderSubmit = function (event) {
 //     console.log(orderData);
 // };
 
+    const handleClearData = function () {
+        orders.length = 0;
+        orderStorage.saveOrders(orders);
+        orderList.renderOrders(orders);
+    };
+
 
     //Set up the init function with Event Listeners
     const init = function () {
@@ -65,6 +71,7 @@ const handleOrderSubmit = function (event) {
             orderList.renderOrders(orders);
         }
         orderForm.addEventListener('submit', handleOrderSubmit);
+        orderList.setClearButton(orders, handleClearData);
     };
 
     //This attaches the init function to the DOM Content Loader event
