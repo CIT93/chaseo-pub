@@ -2,21 +2,13 @@
 // @param {number} householdMembers - Number of people in the household.
 
 const calculateHouseholdPoints = function(householdMembers) {
-    //console.log(householdMembers);
-    // if(householdMembers === 1) {
-    //     return 14;
-    // } else if (householdMembers === 2) {
-    //     return 12;
-    // }
-    // omits block delimiters for single statements
     if(householdMembers === 1) return 14;
     else if (householdMembers === 2) return 12;
     else if (householdMembers === 3) return 10;
     else if (householdMembers === 4) return 8;
-    else if (householdMembers === 5) return 6; // 6+ people total
-    else if (householdMembers > 5) return 4;
-    return 0; // Default or invalid input
-
+    else if (householdMembers === 5) return 6; 
+    else if (householdMembers > 5) return 4
+    return 0; 
 };
 
 // Calculates points for Home Size based on WikiHow Method 1
