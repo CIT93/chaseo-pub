@@ -93,7 +93,7 @@ const handleFormSubmit = function(event) {
     console.log(carbonFootprintEntries);
 
     // Save the entire 'carbonFootprintEntries' array to localStorage using our storage module.
-    storage.saveEntry(carbonFootprintEntries);
+    storage.saveEntries(carbonFootprintEntries);
 
     //console.log(calculatedResults);
     resultsDisplay.displayResults(calculatedResults);
