@@ -173,25 +173,21 @@ const createTableRow = function(entry) {
 // Main function to render the table with the given carbon footprint entries.
 // @param {Array} entries - An array of carbon footprint entry objects to display.
 export const renderTable = function (entries, callbacks) {
-    // Store callbacks passed to renderTable so handleTableClick can access them.
     _currentCallbacks = callbacks;
-    // Loop through each sorted entry and create a table row for it.
-    // Clear any existing rows in the table body to avoid duplicates on re-render.
     footprintTableBody.innerHTML = '';
-    //console.log('inside renderTable')
-    // Using for...of loop for easy iteration
-    // If there are no entries, hide the table and show the "no entries" message.
-    if(entries.length === 0) {
+
+    // I changed the logic check here...
+    if(entries === 0) { 
         footprintTable.style.display = 'none';
         noEntriesMessage.style.display = 'block';
         clearAllDataButton.style.display = 'none';
-        console.log('No entries to display Table hidden');
-        return; //stop the function here
+        return; 
     } else {
         footprintTable.style.display = 'table';
         noEntriesMessage.style.display = 'none';
         clearAllDataButton.style.display = 'block';
     }
+    // ... rest of the render logic
 
     // Sort entries by timestamp (most recent first) before rendering.
     // We use a spread operator [...] to create a shallow copy so we don't modify the original array order.
