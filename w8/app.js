@@ -11,6 +11,14 @@ const orders = [];
 //Reference to the Form
 const orderForm = document.getElementById('order-form');
 
+const handleDelete = function (id) {
+    console.log("Aoo.js: Requesting delete for order", id);
+};
+
+const handleEdit = function (id) {
+    console.log("App.js: Requesting edit for order", id);
+};
+
 //References the Order Summary
 //const orderSummary = document.getElementById('order-summary');
 
@@ -39,7 +47,11 @@ const handleOrderSubmit = function (event) {
 
     orderStorage.saveOrders(orders);
 
-    orderList.renderOrders(orders);
+    orderList.renderOrders(orders, {
+        onDelete: handleDelete,
+        onEdit: handleEdit
+    });
+    
 
     // To store in the list
     orders.push(newOrder);
@@ -58,7 +70,10 @@ const handleOrderSubmit = function (event) {
     const handleClearData = function () {
         orders.length = 0;
         orderStorage.saveOrders(orders);
-        orderList.renderOrders(orders);
+        orderList.renderOrders(orders, {
+            onDelete: handleDelete,
+            onEdit: handleEdit
+        });
     };
 
 
@@ -69,7 +84,10 @@ const handleOrderSubmit = function (event) {
         if (loadedOrders.length > 0) {
             orders.push(...loadedOrders);
             // Render the full list instead of just the last one
-            orderList.renderOrders(orders);
+            orderList.renderOrders(orders, {
+                onDelete: handleDelete,
+                onEdit: handleEdit
+            });
         }
         orderForm.addEventListener('submit', handleOrderSubmit);
         orderList.setClearButton(orders, handleClearData);

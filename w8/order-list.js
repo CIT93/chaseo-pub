@@ -3,9 +3,11 @@ const orderTableBody = document.getElementById('order-table-body');
 
 const clearBtn = document.getElementById('clear-btn');
 
-const tableBody = document.getElementById('order-table-body');
+//const tableBody = document.getElementById('order-table-body');
 
-tableBody.addEventListener('click', function(event) {
+let moduleCallbacks = {};
+
+orderTableBody.addEventListener('click', function(event) {
     const target = event.target;
     
     // 1. Get the ID from the button that was clicked
@@ -16,7 +18,18 @@ tableBody.addEventListener('click', function(event) {
     if (!id) return;
 
     // 3. Temporary Test: Log the ID to prove it works!
-    console.log("Clicked button with ID:", id); 
+    //console.log("Clicked button with ID:", id); 
+    if (target.classList.contains('delete-btn')) {
+        if (moduleCallbacks.onDelete) {
+            moduleCallbacks.onDelete(id);
+        }
+    }
+
+    if (target.classList.contains('edit-btn')) {
+        if (moduleCallbacks.onEdit) {
+            moduleCallbacks.onEdit(id);
+        }
+    }
 });
 
 let confirmClear = false;
@@ -52,7 +65,8 @@ export const setClearButton = function (orders, isConfirmClear) {
     });
 };
 
-export const renderOrders = function (orders) {
+export const renderOrders = function (orders, callbacks) {
+    moduleCallbacks = callbacks || {};
 
     // Clear
     orderTableBody.innerHTML = '';
