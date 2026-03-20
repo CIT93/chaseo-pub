@@ -26,8 +26,22 @@ const handleDelete = function (id) {
     }
 };
 
+const giftWrapInput = document.getElementById('gift-wrap');
+const qtyInput = document.getElementById('qty');
+const orderIdInput = document.getElementById('order-id');
+
 const handleEdit = function (id) {
-    console.log("App.js: Requesting edit for order", id);
+    const orderToEdit = orders.find(function (order) {
+        return order.id === id;
+    });
+
+    if (orderToEdit) {
+        qtyInput.value = orderToEdit.qty;
+        document.querySelector('input[name="size"][value="' + orderToEdit.size + '"]').checked = true;
+        giftWrapInput.checked = orderToEdit.giftWrap;
+        orderIdInput.value = orderToEdit.id;
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
 };
 
 //References the Order Summary
