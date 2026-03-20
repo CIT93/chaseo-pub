@@ -61,14 +61,39 @@ const handleOrderSubmit = function (event) {
 
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
-    const newOrder = {
-        id: Date.now().toString(),
-        ...orderData,
-        ...calculatedPrice,
-        timestamp: new Date().toISOString()
-    };
+    const currentOrderId = orderIdInput.value;
+    
+    if (currentOrderId) {
+        const index = orders.findIndex(function (order){
+            return order.id === currentOrderId;
+        });
 
-    // resultsDisplay.displayResults(newOrder);
+        if (index !== -1) {
+            orders[index] = {
+                ...orders[index],
+                ...orderData,
+                ...calculatedPrice
+            };
+        } else {
+            const newOrder = {
+                id: Date.now().toString(),
+                ...orderData,
+                ...calculatedPrice,
+                timestamp: new Date().toISOString()
+            };
+
+            orders.push(newOrder);
+        }
+    } else {
+        const newOrder = {
+            id: Date.now().toString(),
+            ...orderData,
+            ...calculatedPrice,
+            timestamp: new Date().toISOString()
+        };
+
+        orders.push(newOrder)
+    }
 
     orderStorage.saveOrders(orders);
 
@@ -79,10 +104,12 @@ const handleOrderSubmit = function (event) {
     
 
     // To store in the list
-    orders.push(newOrder);
+    //orders.push(newOrder);
     console.log(orders);
-    orderStorage.saveOrders(orders);
+    //orderStorage.saveOrders(orders);
     orderHandler.clearOrderForm();
+    orderIdInput.value = '';
+    orderForm.reset();
 };
 
 //     console.log(`Order Input - Object Literal:`);
