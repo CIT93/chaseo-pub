@@ -12,7 +12,18 @@ const orders = [];
 const orderForm = document.getElementById('order-form');
 
 const handleDelete = function (id) {
-    console.log("Aoo.js: Requesting delete for order", id);
+    const indexToDelete = orders.findIndex(function (order) {
+        return order.id === id;
+    });
+
+    if (indexToDelete !== -1) {
+        orders.splice(indexToDelete, 1);
+        orderStorage.saveOrders(orders);
+        orderList.renderOrders(orders, {
+            onDelete: handleDelete,
+            onEdit: handleEdit
+        });
+    }
 };
 
 const handleEdit = function (id) {
